@@ -4,22 +4,21 @@ One-page website for 1876 Banquets & Conference Center. Static HTML/CSS/JS with 
 
 ## Edit content
 
-Everything you would normally change is in **`src/content.mjs`**: email, phone, address, Google Maps links, social links, form endpoint, pricing, room details, features, gallery photos and SEO text.
+Everything you would normally change is in **`src/content.mjs`**: email, phone, address, Google Maps links, social links, form endpoint, pricing, room details, features and SEO text.
 
 Layout and markup are in `src/template.mjs`, styles in `public/styles.css`, and behaviour (menu, form, sticky mobile button) in `public/main.js`.
 
 ## Photos
 
-Put photos in `public/images/` using these file names. Until a file exists, a labelled placeholder shows in its place.
+Put master photos (JPEG, about 1800px wide) in `assets/photos/` using these file names, then run `python scripts/optimize_images.py` (needs `pip install pillow`). It writes WebP and JPEG copies at several widths into `public/images/`, and the page serves the right size for each screen. Until a photo exists, a labelled placeholder shows in its place.
 
 | File | Where it appears |
 | --- | --- |
-| `hero.jpg` | Hero (4:3) |
+| `hero-exterior.jpg`, `hero-table.jpg`, `hero-classroom.jpg`, `hero-screen.jpg` | Hero collage (set in `images.hero`; photos are cropped to fit) |
 | `champlain-room.jpg`, `fitzroy-room.jpg`, `carlton-ballroom.jpg` | Room rows (3:2) |
-| `gallery-01.jpg` … `gallery-09.jpg` | Gallery (cropped to fit) |
 | `og-image.jpg` | Link preview when the site is shared (1200 × 630) |
 
-Export photos about 2000px on the long edge and compress them (JPEG quality ~75, or WebP with matching names updated in `content.mjs`). When you add a photo, update its `alt` text in `content.mjs` to describe what it actually shows.
+`og-image.jpg` and the logo PNGs live directly in `public/images/`. When you add a photo, update its `alt` text in `content.mjs` to describe what it actually shows.
 
 ## Inquiry form
 

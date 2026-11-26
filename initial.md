@@ -54,18 +54,18 @@ The site should look more like a modern premium business/event venue.
 ### Color palette
 
 Primary:
-- Dark Slate / Graphite: `#202426`
-- Deep Graphite: `#151819`
+- Slate Blue: `#262D32`
+- Deep Slate Blue: `#1B2024` (footer; darker shade of #262D32)
 
 Accent:
-- Muted Gold: `#B39A62`
+- Gold: `#C59B47`
 
 Background:
 - Warm Cream: `#F5F2EA`
 - Off White: `#FAF9F6`
 
 Text:
-- Dark: `#202426`
+- Dark: `#262D32`
 - Secondary gray: `#6F706C`
 
 Use gold sparingly for:

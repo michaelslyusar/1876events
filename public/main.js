@@ -3,7 +3,13 @@
 
   /* Header border once the page scrolls */
   const header = d.querySelector(".site-header");
-  const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 8);
+  const toTop = d.querySelector(".to-top");
+  const onScroll = () => {
+    header.classList.toggle("is-scrolled", window.scrollY > 8);
+    const up = window.scrollY > window.innerHeight * 0.8;
+    toTop.classList.toggle("is-visible", up);
+    toTop.tabIndex = up ? 0 : -1;
+  };
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
@@ -62,6 +68,27 @@
 
   /* Inquiry form */
   if (!form) return;
+
+  /* Date field: the native picker shows its placeholder in the browser's language,
+     so show an English placeholder and an English date until the field is focused. */
+  const date = form.elements.eventDate;
+  const fmtDate = (iso) => new Date(iso + "T00:00").toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" });
+  const dateToText = () => {
+    if (date.type !== "date") return;
+    date.dataset.iso = date.value;
+    date.type = "text";
+    date.value = date.dataset.iso ? fmtDate(date.dataset.iso) : "";
+  };
+  const dateToPicker = () => {
+    if (date.type === "date") return;
+    date.type = "date";
+    date.value = date.dataset.iso || "";
+    try { date.showPicker(); } catch {}
+  };
+  date.placeholder = "Select a date";
+  dateToText();
+  date.addEventListener("focus", dateToPicker);
+  date.addEventListener("blur", dateToText);
   const endpoint = (form.dataset.endpoint || "").trim();
   const email = form.dataset.email;
   const status = form.querySelector(".form__status");

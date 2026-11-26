@@ -18,16 +18,18 @@ export const site = {
     regionCode: "ON",
     postalCode: "", // add when confirmed; used in structured data
     country: "CA",
-    area: "Ottawa West",
+    area: "Nepean, Ottawa",
   },
 
   maps: {
-    // Opens Google Maps directions to the venue.
+    // Opens Google Maps directions to the venue's Google Business listing.
     directionsUrl:
-      "https://www.google.com/maps/dir/?api=1&destination=1876+Robertson+Road%2C+Ottawa%2C+ON",
-    // Embedded map. To use the official embed from your Google Business Profile,
-    // open Google Maps > Share > Embed a map, and paste the iframe's src here.
-    embedUrl: "https://www.google.com/maps?q=1876+Robertson+Road,+Ottawa,+ON&output=embed",
+      "https://www.google.com/maps/dir/?api=1&destination=1876+Banquets+%26+Conference+Center%2C+1876+Robertson+Road%2C+Ottawa%2C+ON",
+    // Embedded map, pinned to the "1876 Banquets & Conference Center" business listing.
+    // To use the official embed instead, open Google Maps > Share > Embed a map,
+    // and paste the iframe's src here.
+    embedUrl:
+      "https://www.google.com/maps?q=1876+Banquets+%26+Conference+Center,+1876+Robertson+Road,+Ottawa,+ON&output=embed",
   },
 
   // Leave a value empty to hide that link.
@@ -62,7 +64,14 @@ export const site = {
 // Until a file exists, a labelled placeholder shows in its place.
 // When you add a real photo, update its `alt` to describe what it actually shows.
 export const images = {
-  hero: { src: "images/hero.jpg", alt: "Carlton Ballroom at 1876, set for an event" },
+  // Hero collage, in order: one large photo, one tall photo, then two wide ones.
+  // `pos` (optional) is the CSS object-position that keeps the subject in frame.
+  hero: [
+    { src: "images/hero-exterior.jpg", alt: "1876 at dusk, with the covered entrance on Robertson Road", pos: "85% 50%" },
+    { src: "images/hero-table.jpg", alt: "Banquet table set with a gold runner and greenery for a celebration" },
+    { src: "images/hero-classroom.jpg", alt: "Meeting room set classroom-style with a projection screen" },
+    { src: "images/hero-screen.jpg", alt: "Tables facing a projection screen in a meeting room" },
+  ],
 };
 
 export const rooms = [
@@ -71,49 +80,56 @@ export const rooms = [
     name: "Champlain Room",
     shortName: "Champlain",
     formValue: "Champlain",
-    sqft: 267,
+    sqft: 400,
+    capacity: 10,
+    // Floor-area diagram: `shape` is width ÷ depth (1 = square); `layout` is
+    // "boardroom", "theatre" or "ballroom".
+    shape: 2.2,
+    layout: "boardroom",
     summary: "A private room for focused conversations and small groups.",
     usesLabel: "Best suited for",
     uses: ["Small meetings", "Interviews", "Private sessions", "Small team gatherings"],
     note: "",
-    image: { src: "images/champlain-room.jpg", alt: "Champlain Room set for a small meeting" },
+    image: { src: "images/champlain-room.jpg", alt: "Champlain Room with a boardroom table for ten and a wall-mounted TV" },
   },
   {
     id: "fitzroy",
+    layout: "theatre",
     name: "Fitzroy Room",
     shortName: "Fitzroy",
     formValue: "Fitzroy",
     sqft: 957,
+    capacity: 50,
     summary: "A mid-sized room that adapts to the format, from a training day to a presentation or workshop.",
     usesLabel: "Suitable for",
     uses: ["Corporate training", "Workshops", "Seminars", "Presentations", "Medium-sized events"],
-    note: "Capacity depends on room configuration.",
-    image: { src: "images/fitzroy-room.jpg", alt: "Fitzroy Room arranged for a training session" },
+    note: "",
+    image: { src: "images/fitzroy-room.jpg", alt: "Fitzroy Room set theatre-style with rows of chairs facing a lectern" },
   },
   {
     id: "carlton",
     name: "Carlton Ballroom",
     shortName: "Carlton",
     formValue: "Carlton Ballroom",
-    sqft: 1965,
-    sections: 3,
+    sqft: 3000,
+    capacity: 250,
+    shape: 1.8,
+    layout: "ballroom",
+    sections: ["A", "B", "C"],
     summary:
-      "Our largest space. Book one section for a meeting, or open the full ballroom for a conference or celebration.",
+      "Our largest space. Book one section for a meeting, or open the full ballroom for a conference, gala or celebration.",
     usesLabel: "Suitable for",
     uses: ["Conferences", "Larger meetings", "Celebrations", "Presentations", "Private events"],
-    note: "Divides into three sections for flexible configurations.",
-    image: { src: "images/carlton-ballroom.jpg", alt: "Carlton Ballroom with the full room open" },
+    note: "Divides into Sections A, B and C: about 1,000 sq. ft. and up to 80 guests each.",
+    image: { src: "images/carlton-ballroom.jpg", alt: "Carlton Ballroom set with round tables, two projection screens and a lectern" },
   },
 ];
 
 export const features = [
-  { icon: "pin", title: "Ottawa West location", text: "Conveniently located at 1876 Robertson Road." },
   { icon: "parking", title: "Free on-site parking", text: "Easy arrival for guests and attendees." },
   { icon: "door", title: "Separate event entrance", text: "Dedicated exterior access for venue guests." },
-  { icon: "layout", title: "Flexible room layouts", text: "Spaces can be configured according to event requirements." },
-  { icon: "wifi", title: "Wi-Fi", text: "Available throughout the venue." },
-  { icon: "screen", title: "AV equipment available", text: "Projectors, screens, microphones and other equipment can be rented separately." },
-  { icon: "calendar", title: "Corporate & recurring bookings", text: "Flexible options for organizations that need regular meeting or training space." },
+  { icon: "layout", title: "Configurable layouts", text: "Each room is set up to suit your format." },
+  { icon: "screen", title: "Wi-Fi & AV", text: "Wi-Fi throughout. Projectors, screens and microphones available to rent." },
 ];
 
 export const corporateUses = [
@@ -123,20 +139,6 @@ export const corporateUses = [
   "Presentations",
   "Planning sessions",
   "Recurring company events",
-];
-
-// Gallery: 6 to 12 photos work with the layout. `size` is "lg", "tall", "wide" or "".
-// The default pattern fills a clean grid with exactly nine photos.
-export const gallery = [
-  { src: "images/gallery-01.jpg", alt: "Carlton Ballroom set for a conference", size: "lg" },
-  { src: "images/gallery-02.jpg", alt: "Fitzroy Room arranged for training", size: "tall" },
-  { src: "images/gallery-03.jpg", alt: "Champlain Room meeting table", size: "" },
-  { src: "images/gallery-04.jpg", alt: "Separate event entrance", size: "" },
-  { src: "images/gallery-05.jpg", alt: "Carlton Ballroom divided into sections", size: "wide" },
-  { src: "images/gallery-06.jpg", alt: "Presentation screen and AV setup", size: "" },
-  { src: "images/gallery-07.jpg", alt: "Exterior of 1876 on Robertson Road", size: "" },
-  { src: "images/gallery-08.jpg", alt: "On-site parking", size: "wide" },
-  { src: "images/gallery-09.jpg", alt: "Carlton Ballroom set for a celebration", size: "wide" },
 ];
 
 export const eventTypes = [
@@ -151,10 +153,18 @@ export const eventTypes = [
   "Other",
 ];
 
+// Scrolling offer strip under Pricing. Clicking it opens the form with
+// "Recurring booking" preselected. Leave the list empty to hide the strip.
+export const ticker = [
+  "Special rates for recurring bookings",
+  "Book weekly or monthly and pay less per session",
+  "Preferred terms for multi-day training",
+  "One dependable room, on your schedule",
+  "Ask about our recurring-booking offer",
+];
+
 export const nav = [
   { href: "#spaces", label: "Spaces" },
-  { href: "#about", label: "About" },
-  { href: "#gallery", label: "Gallery" },
   { href: "#location", label: "Location" },
   { href: "#contact", label: "Contact" },
 ];

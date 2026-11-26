@@ -2,7 +2,7 @@
 //   node build.mjs          build once
 //   node build.mjs --serve  build, then preview at http://localhost:4173
 
-import { mkdir, rm, cp, writeFile, readFile } from "node:fs/promises";
+import { mkdir, rm, cp, writeFile, readFile, readdir } from "node:fs/promises";
 import { createServer } from "node:http";
 import { extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -16,7 +16,15 @@ const { domain } = content.site;
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
 await cp(join(root, "public"), dist, { recursive: true });
-await writeFile(join(dist, "index.html"), render(content));
+// Photo sizes made by scripts/optimize_images.py, e.g. images/hero-table.jpg -> [640, 1024, 1100].
+const variants = {};
+for (const file of await readdir(join(root, "public", "images"))) {
+  const m = file.match(/^(.+)-(\d+)\.webp$/);
+  if (m) (variants[`images/${m[1]}.jpg`] ??= []).push(Number(m[2]));
+}
+Object.values(variants).forEach((w) => w.sort((a, b) => a - b));
+
+await writeFile(join(dist, "index.html"), render({ ...content, variants }));
 await writeFile(join(dist, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${domain}/sitemap.xml\n`);
 await writeFile(
   join(dist, "sitemap.xml"),
