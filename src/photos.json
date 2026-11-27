@@ -1,0 +1,68 @@
+{
+  "1876-events-entrance": {
+    "widths": [
+      640,
+      1024,
+      1540
+    ],
+    "width": 1540,
+    "height": 925
+  },
+  "banquet-table-setting": {
+    "widths": [
+      640,
+      1024,
+      1100
+    ],
+    "width": 1100,
+    "height": 1531
+  },
+  "carlton-ballroom-ottawa": {
+    "widths": [
+      640,
+      1024,
+      1600,
+      1800
+    ],
+    "width": 1800,
+    "height": 1200
+  },
+  "champlain-meeting-room": {
+    "widths": [
+      640,
+      1024,
+      1600,
+      1800
+    ],
+    "width": 1800,
+    "height": 1200
+  },
+  "classroom-training-setup": {
+    "widths": [
+      640,
+      1024,
+      1400
+    ],
+    "width": 1400,
+    "height": 925
+  },
+  "fitzroy-training-room": {
+    "widths": [
+      640,
+      1024,
+      1600,
+      1800
+    ],
+    "width": 1800,
+    "height": 1200
+  },
+  "meeting-room-presentation-setup": {
+    "widths": [
+      640,
+      1024,
+      1400
+    ],
+    "width": 1400,
+    "height": 957
+  }
+}
