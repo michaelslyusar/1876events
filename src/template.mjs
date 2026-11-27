@@ -617,7 +617,7 @@ ${
         </div>
       </div>
       <div class="map">
-        <iframe src="${esc(site.maps.embedUrl)}${t.locale === "fr" ? "&amp;hl=fr" : ""}" title="${t.attr("Map showing {address}", { address: `${a.street}, ${a.city}` })}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        <iframe src="${esc(site.maps.embedUrl)}&amp;hl=${t.locale}" title="${t.attr("Map showing {address}", { address: `${a.street}, ${a.city}` })}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
       </div>
     </div>
   </section>
